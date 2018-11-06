@@ -1,5 +1,6 @@
 package com.example.home_pc.myfirstkotlinapplication
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -23,6 +24,9 @@ class MainActivity : AppCompatActivity() {
 
         val btnCount = findViewById(R.id.btn_count) as Button
         btnCount.setOnClickListener({ increaseNumber() })
+
+        val btnRandom = findViewById<Button>(R.id.btn_random)
+        btnRandom.setOnClickListener({startSecondActivity()})
     }
 
     private fun increaseNumber() {
@@ -34,5 +38,13 @@ class MainActivity : AppCompatActivity() {
     private fun showToast() {
         val myToast = Toast.makeText(this, "Hello Toast!", Toast.LENGTH_SHORT)
         myToast.show()
+    }
+
+    private fun startSecondActivity(){
+        val randomIntent = Intent(this, SecondActivity::class.java)
+        val countString = textView.text.toString()
+        val count = Integer.parseInt(countString)
+        randomIntent.putExtra(SecondActivity.TOTAL_COUNT, count)
+        startActivity(randomIntent)
     }
 }
